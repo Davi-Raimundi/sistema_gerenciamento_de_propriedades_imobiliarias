@@ -1,0 +1,19 @@
+# Ignore SQL dump files
+*.sql
+
+# Ignore database files
+*.db
+
+# Ignore logs
+*.log
+
+# Ignore node_modules (se aplicável)
+node_modules/
+
+# Ignore environment variables
+.env
+
+# Ignore IDE files
+.idea/
+.vscode/
+*.swp
