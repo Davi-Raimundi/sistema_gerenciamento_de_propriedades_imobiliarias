@@ -1,0 +1,68 @@
+SET SQL_SAFE_UPDATES = 0;
+drop database propriedades;
+create database propriedades;
+use propriedades;
+create table propriedades (
+    id int primary key auto_increment,
+    endereco varchar(255) not null,
+    tipo enum('casa', 'apartamento', 'terreno') not null,
+    valor decimal(10, 2) not null,
+    status enum('disponível', 'vendido', 'alugado') not null
+);
+
+create table clientes (
+    id int primary key auto_increment,
+    nome varchar(255) not null,
+    telefone varchar(15) not null,
+    email varchar(255) not null,
+    tipo_interesse enum('compra', 'aluguel') not null
+);
+
+create table agentes (
+    id int primary key auto_increment,
+    nome varchar(255) not null,
+    telefone varchar(15) not null,
+    email varchar(255) not null
+);
+
+create table transacoes (
+    id int primary key auto_increment,
+    cliente_id int not null,
+    agente_id int not null,
+    propriedade_id int not null,
+    data date not null,
+    tipo_transacao enum('compra', 'aluguel') not null,
+    foreign key (cliente_id) references clientes(id),
+    foreign key (agente_id) references agentes(id),
+    foreign key (propriedade_id) references propriedades(id)
+);
+
+insert into propriedades (endereco, tipo, valor, status) values
+('Rua das Flores, 123', 'casa', 250000.00, 'disponível'),
+('Avenida Central, 456', 'apartamento', 150000.00, 'disponível'),
+('Loteamento Jardim, 789', 'terreno', 80000.00, 'disponível');
+
+insert into clientes (nome, telefone, email, tipo_interesse) values
+('João Silva', '11999999999', 'joao@email.com', 'compra'),
+('Maria Oliveira', '11888888888', 'maria@email.com', 'aluguel');
+
+insert into agentes (nome, telefone, email) values
+('Carlos Pereira', '11777777777', 'carlos@email.com'),
+('Ana Souza', '11666666666', 'ana@email.com');
+
+insert into transacoes (cliente_id, agente_id, propriedade_id, data, tipo_transacao) values
+(1, 1, 1, '2024-09-30', 'compra'),
+(2, 2, 2, '2024-09-30', 'aluguel');
+
+select * from propriedades where status = 'disponível';
+
+select * from clientes where tipo_interesse = 'compra';
+
+select t.id, c.nome as cliente, a.nome as agente, p.endereco as propriedade, t.data, t.tipo_transacao
+from transacoes t
+join clientes c on t.cliente_id = c.id
+join agentes a on t.agente_id = a.id
+join propriedades p on t.propriedade_id = p.id;
+
+select * from propriedades where tipo = 'apartamento';
+
