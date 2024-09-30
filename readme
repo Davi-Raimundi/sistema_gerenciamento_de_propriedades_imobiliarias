@@ -1,0 +1,25 @@
+# Sistema de Gerenciamento Imobiliário
+
+Este projeto é um sistema de gerenciamento para propriedades imobiliárias, que permite o registro e a consulta de propriedades, clientes, agentes e transações.
+
+## Estrutura do Banco de Dados
+
+O banco de dados é composto por quatro tabelas principais:
+
+- **propriedades**: Armazena informações sobre propriedades, como endereço, tipo, valor e status.
+- **clientes**: Armazena detalhes dos clientes, incluindo nome, telefone, e-mail e tipo de interesse.
+- **agentes**: Armazena informações sobre agentes imobiliários.
+- **transacoes**: Registra transações de compra e aluguel, vinculando clientes, agentes e propriedades.
+
+## Comandos SQL
+
+Os comandos SQL para criar as tabelas e inserir dados estão incluídos no projeto. Para inicializar o banco de dados, você pode executar o seguinte script:
+
+```sql
+SET SQL_SAFE_UPDATES = 0;
+DROP DATABASE IF EXISTS propriedades;
+CREATE DATABASE propriedades;
+USE propriedades;
+
+-- Criação das tabelas
+-- (inclua o restante das instruções SQL aqui)
